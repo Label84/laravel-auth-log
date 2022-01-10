@@ -24,7 +24,7 @@ class LogAuthAction
             'user_id' => isset($event->user) ? $event->user->id : null,
             'ip_address' => Request::ip(),
             'user_agent' => Request::userAgent(),
-            'context' => json_encode($context),
+            'context' => is_array($context) ? json_encode($context) : null,
         ]);
     }
 
