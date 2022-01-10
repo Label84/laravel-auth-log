@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Request;
 class LogAuthAction
 {
     /** @param mixed $event */
-    public function handle($event): void
+    public function handle($event, array $context = null): void
     {
         if (config('authlog.enabled') == false) {
             return;
@@ -24,6 +24,7 @@ class LogAuthAction
             'user_id' => isset($event->user) ? $event->user->id : null,
             'ip_address' => Request::ip(),
             'user_agent' => Request::userAgent(),
+            'context' => json_encode($context),
         ]);
     }
 
