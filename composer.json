@@ -1,0 +1,37 @@
+{
+    "name": "label84/laravel-auth-log",
+    "description": "Log user authentication actions in Laravel.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+        "name": "Label84",
+        "email": "info@tjardo.com"
+    }],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "illuminate/support": "^8.0",
+        "illuminate/auth": "^8.0",
+        "illuminate/database": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "nunomaduro/larastan": "^1.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Label84\\AuthLog\\AuthLogServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Label84\\AuthLog\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Label84\\AuthLog\\Tests\\": "tests"
+        }
+    }
+}
