@@ -10,11 +10,11 @@ class LogAuthAction
     /** @param mixed $event */
     public function handle($event): void
     {
-        if (! config('authlog.enabled')) {
+        if (config('authlog.enabled') == false) {
             return;
         }
 
-        if (! in_array(get_class($event), config('authlog.events'))) {
+        if (!in_array(get_class($event), config('authlog.events'))) {
             return;
         }
 
