@@ -21,7 +21,7 @@ class LogAuthAction
         DB::connection(config('authlog.database_connection'))->table(config('authlog.table_name'))->insert([
             'event_name' => class_basename($event),
             'email' => $this->getEmailParameter($event),
-            'user_id' => isset($event->user) ? $event->user->id : null,
+            'user_id' => $this->getUserIdParameter($event),
             'ip_address' => Request::ip(),
             'user_agent' => Request::userAgent(),
             'context' => is_array($context) ? json_encode($context) : null,
@@ -37,6 +37,20 @@ class LogAuthAction
 
         if (isset($event->request) && $event->request->has('email')) {
             return $event->request->email;
+        }
+
+        return null;
+    }
+
+    /** @param mixed $event */
+    private function getUserIdParameter($event): ?string
+    {
+        if (isset($event->user)) {
+            return $event->user->id;
+        }
+
+        if (Request::user()) {
+            return Request::user()->id;
         }
 
         return null;
