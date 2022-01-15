@@ -17,12 +17,13 @@ The ``laravel-auth-log`` package will log all the default Laravel authentication
 
 ## Requirements
 
-- Laravel 8.x
+- Laravel 8.x or 9.x
 
 ## Laravel support
 
 | Version | Release |
 |---------|---------|
+| 9.x     | 1.1     |
 | 8.x     | 1.0     |
 
 ## Installation
