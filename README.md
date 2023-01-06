@@ -4,7 +4,7 @@
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Quality Score](https://img.shields.io/scrutinizer/g/label84/laravel-auth-log.svg?style=flat-square)](https://scrutinizer-ci.com/g/label84/laravel-auth-log)
 [![Total Downloads](https://img.shields.io/packagist/dt/label84/laravel-auth-log.svg?style=flat-square)](https://packagist.org/packages/label84/laravel-auth-log)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/label84/laravel-auth-log/run-tests?label=Tests&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/label84/laravel-auth-log/run-tests.yml?branch=master&style=flat-square)
 
 The ``laravel-auth-log`` package will log all the default Laravel authentication events (Login, Attempting, Lockout, etc.) to your database. In the config file you can select the events that you would like to log. It will save the event name, email, user id, ip address and user agent to the database. No other configurations are required. This package could be useful for tracking unwanted activity in your Laravel application.
 
@@ -49,7 +49,7 @@ php artisan migrate
 
 ## Usage
 
-In the config file ``config/authlog.php`` you can (un)comment the events that you'd like to log to your database. 
+In the config file ``config/authlog.php`` you can (un)comment the events that you'd like to log to your database.
 
 ```php
 // config/authlog.php
