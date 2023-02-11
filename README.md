@@ -8,23 +8,18 @@
 
 The ``laravel-auth-log`` package will log all the default Laravel authentication events (Login, Attempting, Lockout, etc.) to your database. In the config file you can select the events that you would like to log. It will save the event name, email, user id, ip address and user agent to the database. No other configurations are required. This package could be useful for tracking unwanted activity in your Laravel application.
 
-- [Requirements](#requirements)
-- [Laravel support](#laravel-support)
+- [Laravel Support](#laravel-support)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Tests](#tests)
 - [License](#license)
 
-## Requirements
-
-- Laravel 8.x or 9.x
-
-## Laravel support
+## Laravel Support
 
 | Version | Release |
 |---------|---------|
+| 10.x    | 1.1     |
 | 9.x     | 1.1     |
-| 8.x     | 1.0     |
 
 ## Installation
 
