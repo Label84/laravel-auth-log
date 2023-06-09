@@ -26,7 +26,7 @@ class LogAuthAction
             'ip_address' => Request::ip(),
             'user_agent' => Request::userAgent(),
             'context' => is_array($context) ? json_encode($context) : null,
-            'created_at' => Carbon::now()->timezone(config('app.timezone')),
+            'created_at' => Carbon::now()->timezone(config('app.timezone', 'UTC')),
         ]);
     }
 
