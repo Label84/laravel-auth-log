@@ -2,6 +2,7 @@
 
 namespace Label84\AuthLog\Listeners;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
@@ -25,6 +26,7 @@ class LogAuthAction
             'ip_address' => Request::ip(),
             'user_agent' => Request::userAgent(),
             'context' => is_array($context) ? json_encode($context) : null,
+            'created_at' => Carbon::now()->timezone(config('app.timezone')),
         ]);
     }
 
