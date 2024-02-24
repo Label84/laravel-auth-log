@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Request;
 class LogAuthAction
 {
     /** @param mixed $event */
-    public function handle($event, array $context = null): void
+    public function handle($event, ?array $context = null): void
     {
         if (config('authlog.enabled') == false) {
             return;
         }
 
-        if (!in_array(get_class($event), config('authlog.events'))) {
+        if (! in_array(get_class($event), config('authlog.events'))) {
             return;
         }
 

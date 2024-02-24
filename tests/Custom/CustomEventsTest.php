@@ -16,8 +16,7 @@ class CustomEventsTest extends TestCase
         parent::setUp();
     }
 
-    /** @test */
-    public function it_can_add_context_to_the_database_record()
+    public function test_it_can_add_context_to_the_database_record()
     {
         $event = new \Illuminate\Auth\Events\Login('web', $this->user, false);
 

@@ -2,7 +2,6 @@
 
 [![Latest Stable Version](https://poser.pugx.org/label84/laravel-auth-log/v/stable?style=flat-square)](https://packagist.org/packages/label84/laravel-auth-log)
 [![MIT Licensed](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Quality Score](https://img.shields.io/scrutinizer/g/label84/laravel-auth-log.svg?style=flat-square)](https://scrutinizer-ci.com/g/label84/laravel-auth-log)
 [![Total Downloads](https://img.shields.io/packagist/dt/label84/laravel-auth-log.svg?style=flat-square)](https://packagist.org/packages/label84/laravel-auth-log)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/label84/laravel-auth-log/run-tests.yml?branch=master&style=flat-square)
 
@@ -18,8 +17,8 @@ The ``laravel-auth-log`` package will log all the default Laravel authentication
 
 | Version | Release |
 |---------|---------|
+| 11.x    | 1.1     |
 | 10.x    | 1.1     |
-| 9.x     | 1.1     |
 
 ## Installation
 
