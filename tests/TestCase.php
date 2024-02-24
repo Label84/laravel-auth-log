@@ -2,8 +2,8 @@
 
 namespace Label84\AuthLog\Tests;
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Label84\AuthLog\AuthLogServiceProvider;
 use Orchestra\Testbench\Factories\UserFactory;
 
