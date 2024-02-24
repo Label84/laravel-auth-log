@@ -22,7 +22,7 @@ class AuthLogServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-              __DIR__.'/../config/config.php' => config_path('authlog.php'),
+                __DIR__.'/../config/config.php' => config_path('authlog.php'),
             ], 'config');
         }
     }
