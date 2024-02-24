@@ -18,8 +18,8 @@ The ``laravel-auth-log`` package will log all the default Laravel authentication
 
 | Version | Release |
 |---------|---------|
+| 11.x    | 1.1     |
 | 10.x    | 1.1     |
-| 9.x     | 1.1     |
 
 ## Installation
 
