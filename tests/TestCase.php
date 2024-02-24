@@ -2,6 +2,8 @@
 
 namespace Label84\AuthLog\Tests;
 
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 use Label84\AuthLog\AuthLogServiceProvider;
 use Orchestra\Testbench\Factories\UserFactory;
 
@@ -13,7 +15,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->setUpDatabase();
 
         $this->user = (new UserFactory())->make([
             'id' => 1000,
@@ -30,8 +32,30 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function getEnvironmentSetUp($app): void
     {
-        include_once __DIR__.'/../database/migrations/create_auth_logs_table.php.stub';
+        config()->set('authlog.database_connection', 'sqlite');
+        config()->set('database.default', 'sqlite');
+        config()->set('database.connections.sqlite', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+        ]);
+    }
 
-        (new \CreateAuthLogsTable())->up();
+    protected function setUpDatabase()
+    {
+        Schema::create(config('authlog.table_name'), function (Blueprint $table) {
+            $table->id();
+
+            $table->string('event_name');
+            $table->string('email')->nullable();
+
+            $table->unsignedBigInteger('user_id')->nullable();
+
+            $table->string('ip_address');
+            $table->text('user_agent')->nullable();
+
+            $table->text('context')->nullable();
+
+            $table->datetime('created_at')->useCurrent();
+        });
     }
 }

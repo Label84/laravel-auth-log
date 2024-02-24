@@ -5,10 +5,6 @@
       <directory suffix="Test.php">./tests</directory>
     </testsuite>
   </testsuites>
-  <php>
-    <env name="DB_CONNECTION" value="sqlite"/>
-    <server name="DB_DATABASE" value=":memory:"/>
-  </php>
   <source>
     <include>
       <directory suffix=".php">src/</directory>
