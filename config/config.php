@@ -2,6 +2,11 @@
 
 return [
     /*
+     * Enable/Disable the logging to the database.
+     */
+    'enabled' => env('AUTH_LOG_ENABLED', true),
+
+    /*
      * The database table name.
      */
     'table_name' => 'authentication_logs',
@@ -14,14 +19,7 @@ return [
     'database_connection' => env('DB_CONNECTION', 'mysql'),
 
     /*
-     * Enable/Disable the logging to the database.
-     */
-    'enabled' => env('AUTH_LOG_ENABLED', true),
-
-    /*
      * All events that the package will log to the database.
-     *
-     * You can comment out (//) the events that you don't want to log.
      */
     'events' => [
         \Illuminate\Auth\Events\Attempting::class,
