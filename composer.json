@@ -15,7 +15,7 @@
     },
     "require-dev": {
         "orchestra/testbench": "^8.0|^9.0",
-        "nunomaduro/larastan": "^2.0"
+        "larastan/larastan": "^2.0"
     },
     "extra": {
         "laravel": {
