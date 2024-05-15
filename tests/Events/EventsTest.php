@@ -16,6 +16,15 @@ class EventsTest extends TestCase
         parent::setUp();
     }
 
+    public function test_it_triggers_log_auth_action_on_registered_event()
+    {
+        $logAuthAction = $this->spy(LogAuthAction::class);
+
+        event(new \Illuminate\Auth\Events\Registered($this->user));
+
+        $logAuthAction->shouldHaveReceived('handle')->once();
+    }
+
     public function test_it_triggers_log_auth_action_on_attempting_event()
     {
         $logAuthAction = $this->spy(LogAuthAction::class);
@@ -34,6 +43,15 @@ class EventsTest extends TestCase
         $logAuthAction->shouldHaveReceived('handle')->once();
     }
 
+    public function test_it_triggers_log_auth_action_on_login_event()
+    {
+        $logAuthAction = $this->spy(LogAuthAction::class);
+
+        event(new \Illuminate\Auth\Events\Login('web', $this->user, false));
+
+        $logAuthAction->shouldHaveReceived('handle')->once();
+    }
+
     public function test_it_triggers_log_auth_action_on_failed_event()
     {
         $logAuthAction = $this->spy(LogAuthAction::class);
@@ -43,20 +61,20 @@ class EventsTest extends TestCase
         $logAuthAction->shouldHaveReceived('handle')->once();
     }
 
-    public function test_it_triggers_log_auth_action_on_lockout_event()
+    public function test_it_triggers_log_auth_action_on_validated_event()
     {
         $logAuthAction = $this->spy(LogAuthAction::class);
 
-        event(new \Illuminate\Auth\Events\Lockout(new Request([])));
+        event(new \Illuminate\Auth\Events\Validated('web', $this->user));
 
         $logAuthAction->shouldHaveReceived('handle')->once();
     }
 
-    public function test_it_triggers_log_auth_action_on_login_event()
+    public function test_it_triggers_log_auth_action_on_verified_event()
     {
         $logAuthAction = $this->spy(LogAuthAction::class);
 
-        event(new \Illuminate\Auth\Events\Login('web', $this->user, false));
+        event(new \Illuminate\Auth\Events\Verified($this->user));
 
         $logAuthAction->shouldHaveReceived('handle')->once();
     }
@@ -70,6 +88,15 @@ class EventsTest extends TestCase
         $logAuthAction->shouldHaveReceived('handle')->once();
     }
 
+    public function test_it_triggers_log_auth_action_on_current_device_logout_event()
+    {
+        $logAuthAction = $this->spy(LogAuthAction::class);
+
+        event(new \Illuminate\Auth\Events\CurrentDeviceLogout('web', $this->user));
+
+        $logAuthAction->shouldHaveReceived('handle')->once();
+    }
+
     public function test_it_triggers_log_auth_action_on_other_device_logout_event()
     {
         $logAuthAction = $this->spy(LogAuthAction::class);
@@ -79,29 +106,20 @@ class EventsTest extends TestCase
         $logAuthAction->shouldHaveReceived('handle')->once();
     }
 
+    public function test_it_triggers_log_auth_action_on_lockout_event()
+    {
+        $logAuthAction = $this->spy(LogAuthAction::class);
+
+        event(new \Illuminate\Auth\Events\Lockout(new Request([])));
+
+        $logAuthAction->shouldHaveReceived('handle')->once();
+    }
+
     public function test_it_triggers_log_auth_action_on_password_reset_event()
     {
         $logAuthAction = $this->spy(LogAuthAction::class);
 
         event(new \Illuminate\Auth\Events\PasswordReset($this->user));
-
-        $logAuthAction->shouldHaveReceived('handle')->once();
-    }
-
-    public function test_it_triggers_log_auth_action_on_registered_event()
-    {
-        $logAuthAction = $this->spy(LogAuthAction::class);
-
-        event(new \Illuminate\Auth\Events\Registered($this->user));
-
-        $logAuthAction->shouldHaveReceived('handle')->once();
-    }
-
-    public function test_it_triggers_log_auth_action_on_verified_event()
-    {
-        $logAuthAction = $this->spy(LogAuthAction::class);
-
-        event(new \Illuminate\Auth\Events\Verified($this->user));
 
         $logAuthAction->shouldHaveReceived('handle')->once();
     }
