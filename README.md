@@ -17,7 +17,7 @@ The ``laravel-auth-log`` package will log all the default Laravel authentication
 
 | Version | Release |
 |---------|---------|
-| 11.x    | ^1.2    |
+| 11.x    | ^1.3    |
 | 10.x    | ^1.2    |
 
 ## Installation
@@ -51,16 +51,18 @@ In the config file ``config/authlog.php`` you can (un)comment the events that yo
 return [
     // ...
     'events' => [
+        \Illuminate\Auth\Events\Registered::class,
         \Illuminate\Auth\Events\Attempting::class,
         // \Illuminate\Auth\Events\Authenticated::class,
-        \Illuminate\Auth\Events\Failed::class,
-        \Illuminate\Auth\Events\Lockout::class,
         \Illuminate\Auth\Events\Login::class,
-        \Illuminate\Auth\Events\Logout::class,
-        \Illuminate\Auth\Events\OtherDeviceLogout::class,
-        \Illuminate\Auth\Events\PasswordReset::class,
-        \Illuminate\Auth\Events\Registered::class,
+        \Illuminate\Auth\Events\Failed::class,
+        // \Illuminate\Auth\Events\Validated::class,
         \Illuminate\Auth\Events\Verified::class,
+        // \Illuminate\Auth\Events\Logout::class,
+        // \Illuminate\Auth\Events\CurrentDeviceLogout::class,
+        // \Illuminate\Auth\Events\OtherDeviceLogout::class,
+        \Illuminate\Auth\Events\Lockout::class,
+        \Illuminate\Auth\Events\PasswordReset::class,
     ],
 ];
 ```
