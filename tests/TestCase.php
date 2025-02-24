@@ -11,13 +11,13 @@ class TestCase extends \Orchestra\Testbench\TestCase
 {
     protected $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->setUpDatabase();
 
-        $this->user = (new UserFactory())->make([
+        $this->user = (new UserFactory)->make([
             'id' => 1000,
             'email' => 'info@example.org',
         ]);

@@ -9,7 +9,4 @@ parameters:
     level: 8
 
     ignoreErrors:
-
-    excludePaths:
-
-    checkMissingIterableValueType: false
+        - identifier: missingType.iterableValue

@@ -11,7 +11,7 @@ class CustomEventsTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
     }
@@ -25,7 +25,7 @@ class CustomEventsTest extends TestCase
             'impersonated_id' => 1001,
         ];
 
-        (new LogAuthAction())->handle($event, $context);
+        (new LogAuthAction)->handle($event, $context);
 
         $this->assertCount(1, DB::table('authentication_logs')
             ->where('event_name', class_basename(\Illuminate\Auth\Events\Login::class))
