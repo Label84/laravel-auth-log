@@ -2,6 +2,18 @@
 
 namespace Label84\AuthLog\Tests\Listeners;
 
+use Illuminate\Auth\Events\Attempting;
+use Illuminate\Auth\Events\Authenticated;
+use Illuminate\Auth\Events\CurrentDeviceLogout;
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Lockout;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
+use Illuminate\Auth\Events\OtherDeviceLogout;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Validated;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,27 +28,27 @@ class ListenerTest extends TestCase
         parent::setUp();
 
         config()->set('authlog.events', [
-            \Illuminate\Auth\Events\Registered::class,
-            \Illuminate\Auth\Events\Attempting::class,
-            \Illuminate\Auth\Events\Authenticated::class,
-            \Illuminate\Auth\Events\Login::class,
-            \Illuminate\Auth\Events\Failed::class,
-            \Illuminate\Auth\Events\Validated::class,
-            \Illuminate\Auth\Events\Verified::class,
-            \Illuminate\Auth\Events\Logout::class,
-            \Illuminate\Auth\Events\CurrentDeviceLogout::class,
-            \Illuminate\Auth\Events\OtherDeviceLogout::class,
-            \Illuminate\Auth\Events\Lockout::class,
-            \Illuminate\Auth\Events\PasswordReset::class,
+            Registered::class,
+            Attempting::class,
+            Authenticated::class,
+            Login::class,
+            Failed::class,
+            Validated::class,
+            Verified::class,
+            Logout::class,
+            CurrentDeviceLogout::class,
+            OtherDeviceLogout::class,
+            Lockout::class,
+            PasswordReset::class,
         ]);
     }
 
     public function test_it_creates_a_database_record_on_registered_event()
     {
-        event(new \Illuminate\Auth\Events\Registered($this->user));
+        event(new Registered($this->user));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Registered::class))
+            ->where('event_name', class_basename(Registered::class))
             ->whereNull('email')
             ->where('user_id', 1000)
             ->get());
@@ -44,10 +56,10 @@ class ListenerTest extends TestCase
 
     public function test_it_creates_a_database_record_on_attempting_event()
     {
-        event(new \Illuminate\Auth\Events\Attempting('web', ['email' => $this->user->email], false));
+        event(new Attempting('web', ['email' => $this->user->email], false));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Attempting::class))
+            ->where('event_name', class_basename(Attempting::class))
             ->where('email', 'info@example.org')
             ->whereNull('user_id')
             ->get());
@@ -55,10 +67,10 @@ class ListenerTest extends TestCase
 
     public function test_it_does_not_create_a_database_record_on_authenticated_event()
     {
-        event(new \Illuminate\Auth\Events\Authenticated('web', $this->user));
+        event(new Authenticated('web', $this->user));
 
         $this->assertCount(0, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Authenticated::class))
+            ->where('event_name', class_basename(Authenticated::class))
             ->where('email', 'info@example.org')
             ->where('user_id', $this->user->id)
             ->get());
@@ -66,10 +78,10 @@ class ListenerTest extends TestCase
 
     public function test_it_creates_a_database_record_on_login_event()
     {
-        event(new \Illuminate\Auth\Events\Login('web', $this->user, false));
+        event(new Login('web', $this->user, false));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Login::class))
+            ->where('event_name', class_basename(Login::class))
             ->whereNull('email')
             ->where('user_id', 1000)
             ->get());
@@ -77,10 +89,10 @@ class ListenerTest extends TestCase
 
     public function test_it_creates_a_database_record_on_failed_event()
     {
-        event(new \Illuminate\Auth\Events\Failed('web', null, ['email' => $this->user->email]));
+        event(new Failed('web', null, ['email' => $this->user->email]));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Failed::class))
+            ->where('event_name', class_basename(Failed::class))
             ->where('email', 'info@example.org')
             ->whereNull('user_id')
             ->get());
@@ -88,10 +100,10 @@ class ListenerTest extends TestCase
 
     public function test_it_creates_a_database_record_on_validated_event()
     {
-        event(new \Illuminate\Auth\Events\Validated('web', $this->user));
+        event(new Validated('web', $this->user));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Validated::class))
+            ->where('event_name', class_basename(Validated::class))
             ->whereNull('email')
             ->where('user_id', 1000)
             ->get());
@@ -99,10 +111,10 @@ class ListenerTest extends TestCase
 
     public function test_it_creates_a_database_record_on_verified_event()
     {
-        event(new \Illuminate\Auth\Events\Verified($this->user));
+        event(new Verified($this->user));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Verified::class))
+            ->where('event_name', class_basename(Verified::class))
             ->whereNull('email')
             ->where('user_id', 1000)
             ->get());
@@ -110,10 +122,10 @@ class ListenerTest extends TestCase
 
     public function test_it_creates_a_database_record_on_logout_event()
     {
-        event(new \Illuminate\Auth\Events\Logout('web', $this->user));
+        event(new Logout('web', $this->user));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Logout::class))
+            ->where('event_name', class_basename(Logout::class))
             ->whereNull('email')
             ->where('user_id', 1000)
             ->get());
@@ -121,10 +133,10 @@ class ListenerTest extends TestCase
 
     public function test_it_creates_a_database_record_on_current_device_logout_event()
     {
-        event(new \Illuminate\Auth\Events\CurrentDeviceLogout('web', $this->user));
+        event(new CurrentDeviceLogout('web', $this->user));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\CurrentDeviceLogout::class))
+            ->where('event_name', class_basename(CurrentDeviceLogout::class))
             ->whereNull('email')
             ->where('user_id', 1000)
             ->get());
@@ -132,10 +144,10 @@ class ListenerTest extends TestCase
 
     public function test_it_creates_a_database_record_on_other_device_logout_event()
     {
-        event(new \Illuminate\Auth\Events\OtherDeviceLogout('web', $this->user));
+        event(new OtherDeviceLogout('web', $this->user));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\OtherDeviceLogout::class))
+            ->where('event_name', class_basename(OtherDeviceLogout::class))
             ->whereNull('email')
             ->where('user_id', 1000)
             ->get());
@@ -145,20 +157,20 @@ class ListenerTest extends TestCase
     {
         $request = new Request(['email' => $this->user->email]);
 
-        event(new \Illuminate\Auth\Events\Lockout($request));
+        event(new Lockout($request));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Lockout::class))
+            ->where('event_name', class_basename(Lockout::class))
             ->where('email', 'info@example.org')
             ->get());
     }
 
     public function test_it_creates_a_database_record_on_password_reset_event()
     {
-        event(new \Illuminate\Auth\Events\PasswordReset($this->user));
+        event(new PasswordReset($this->user));
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\PasswordReset::class))
+            ->where('event_name', class_basename(PasswordReset::class))
             ->whereNull('email')
             ->where('user_id', 1000)
             ->get());

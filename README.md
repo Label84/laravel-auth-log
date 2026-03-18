@@ -17,6 +17,7 @@ The ``laravel-auth-log`` package will log all the default Laravel authentication
 
 | Version | Release |
 |---------|---------|
+| 13.x    | ^1.4    |
 | 12.x    | ^1.4    |
 | 11.x    | ^1.4    |
 
@@ -89,6 +90,7 @@ AUTH_LOG_ENABLED=true
 ## Tests
 
 ```sh
+./vendor/bin/pint
 ./vendor/bin/phpstan analyse
 ./vendor/bin/phpunit
 ```
