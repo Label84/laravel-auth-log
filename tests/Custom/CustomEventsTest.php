@@ -2,6 +2,7 @@
 
 namespace Label84\AuthLog\Tests\Custom;
 
+use Illuminate\Auth\Events\Login;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Label84\AuthLog\Listeners\LogAuthAction;
@@ -18,7 +19,7 @@ class CustomEventsTest extends TestCase
 
     public function test_it_can_add_context_to_the_database_record()
     {
-        $event = new \Illuminate\Auth\Events\Login('web', $this->user, false);
+        $event = new Login('web', $this->user, false);
 
         $context = [
             'impersonator_id' => 1000,
@@ -28,7 +29,7 @@ class CustomEventsTest extends TestCase
         (new LogAuthAction)->handle($event, $context);
 
         $this->assertCount(1, DB::table('authentication_logs')
-            ->where('event_name', class_basename(\Illuminate\Auth\Events\Login::class))
+            ->where('event_name', class_basename(Login::class))
             ->whereNull('email')
             ->where('user_id', 1000)
             ->where('context', json_encode([

@@ -1,5 +1,13 @@
 <?php
 
+use Illuminate\Auth\Events\Attempting;
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Auth\Events\Lockout;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Verified;
+
 return [
     /*
      * Enable/Disable the logging to the database.
@@ -22,17 +30,17 @@ return [
      * All events that the package will log to the database.
      */
     'events' => [
-        \Illuminate\Auth\Events\Registered::class,
-        \Illuminate\Auth\Events\Attempting::class,
+        Registered::class,
+        Attempting::class,
         // \Illuminate\Auth\Events\Authenticated::class,
-        \Illuminate\Auth\Events\Login::class,
-        \Illuminate\Auth\Events\Failed::class,
+        Login::class,
+        Failed::class,
         // \Illuminate\Auth\Events\Validated::class,
-        \Illuminate\Auth\Events\Verified::class,
+        Verified::class,
         // \Illuminate\Auth\Events\Logout::class,
         // \Illuminate\Auth\Events\CurrentDeviceLogout::class,
         // \Illuminate\Auth\Events\OtherDeviceLogout::class,
-        \Illuminate\Auth\Events\Lockout::class,
-        \Illuminate\Auth\Events\PasswordReset::class,
+        Lockout::class,
+        PasswordReset::class,
     ],
 ];
